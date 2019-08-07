@@ -1,0 +1,2561 @@
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ bin/rails:9
+  [1m[35m (11.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateContacts (20190725184459)
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "contacts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190725184459_create_contacts.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190725184459"]]
+  ↳ bin/rails:9
+  [1m[35m (8.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreatePhones (20190725184553)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "phones" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "number" varchar, "contact_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_0c8c68a120"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+)[0m
+  ↳ db/migrate/20190725184553_create_phones.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_phones_on_contact_id" ON "phones" ("contact_id")[0m
+  ↳ db/migrate/20190725184553_create_phones.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190725184553"]]
+  ↳ bin/rails:9
+  [1m[35m (9.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateAdresses (20190725184643)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "adresses" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "street" varchar, "number" varchar, "neighborhood" varchar, "contact_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_2a13a96b32"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+)[0m
+  ↳ db/migrate/20190725184643_create_adresses.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_adresses_on_contact_id" ON "adresses" ("contact_id")[0m
+  ↳ db/migrate/20190725184643_create_adresses.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190725184643"]]
+  ↳ bin/rails:9
+  [1m[35m (11.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateKinds (20190725184714)
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "kinds" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190725184714_create_kinds.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190725184714"]]
+  ↳ bin/rails:9
+  [1m[35m (8.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateContactKinds (20190725184805)
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "contact_kinds" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "contact_id" integer, "kind_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_f0f8c63c6d"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+, CONSTRAINT "fk_rails_dbfc07c927"
+FOREIGN KEY ("kind_id")
+  REFERENCES "kinds" ("id")
+)[0m
+  ↳ db/migrate/20190725184805_create_contact_kinds.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_contact_kinds_on_contact_id" ON "contact_kinds" ("contact_id")[0m
+  ↳ db/migrate/20190725184805_create_contact_kinds.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_contact_kinds_on_kind_id" ON "contact_kinds" ("kind_id")[0m
+  ↳ db/migrate/20190725184805_create_contact_kinds.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190725184805"]]
+  ↳ bin/rails:9
+  [1m[35m (6.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-07-25 18:50:26.025515"], ["updated_at", "2019-07-25 18:50:26.025515"]]
+  ↳ bin/rails:9
+  [1m[35m (4.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mContact Create (0.7ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "João"], ["created_at", "2019-07-25 18:52:43.888196"], ["updated_at", "2019-07-25 18:52:43.888196"]]
+  [1m[35m (8.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mContact Create (0.6ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Maria"], ["created_at", "2019-07-25 18:54:53.049771"], ["updated_at", "2019-07-25 18:54:53.049771"]]
+  [1m[35m (5.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mContact Load (0.6ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" ORDER BY "contacts"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mContact Load (0.4ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mContact Load (0.5ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" ORDER BY "contacts"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+Started GET "/" for 127.0.0.1 at 2019-07-31 17:51:05 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/brunofesil/.rvm/gems/ruby-2.5.3/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+ActionController::RoutingError (uninitialized constant PagesController):
+  
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `block in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:8:in `without_bootsnap_cache'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `rescue in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:58:in `load_missing_constant'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (5.2.3) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2019-07-31 17:55:17 -0300
+  
+ActionController::RoutingError (uninitialized constant PagesController):
+  
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `block in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:8:in `without_bootsnap_cache'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `rescue in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:58:in `load_missing_constant'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (5.2.3) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2019-07-31 17:55:19 -0300
+  
+ActionController::RoutingError (uninitialized constant PagesController):
+  
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `block in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:8:in `without_bootsnap_cache'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `rescue in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:58:in `load_missing_constant'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (5.2.3) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2019-07-31 17:55:20 -0300
+  
+ActionController::RoutingError (uninitialized constant PagesController):
+  
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `block in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:8:in `without_bootsnap_cache'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `rescue in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:58:in `load_missing_constant'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (5.2.3) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2019-07-31 18:06:04 -0300
+  
+ActionController::RoutingError (uninitialized constant PagesController):
+  
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `block in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:8:in `without_bootsnap_cache'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `rescue in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:58:in `load_missing_constant'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (5.2.3) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2019-07-31 18:11:17 -0300
+  
+ActionController::RoutingError (uninitialized constant PagesController):
+  
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `block in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:8:in `without_bootsnap_cache'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `rescue in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:58:in `load_missing_constant'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (5.2.3) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2019-07-31 18:12:22 -0300
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 932ms (Views: 930.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:12:25 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.7ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (22.3ms)
+Completed 500 Internal Server Error in 41ms (ActiveRecord: 1.5ms)
+
+
+  
+ActionView::Template::Error (undefined method `description' for #<Contact:0x00007f891009aa38>):
+    15:     <% @contacts.each do |contact| %>
+    16:       <tr>
+    17:         <td><%= contact.name %></td>
+    18:         <td><%= contact.description %></td>
+    19:         <td><%= link_to 'Show', contact %></td>
+    20:         <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
+    21:         <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  
+app/views/contacts/index.html.erb:18:in `block in _app_views_contacts_index_html_erb__2237183648610195297_70113200469300'
+app/views/contacts/index.html.erb:15:in `_app_views_contacts_index_html_erb__2237183648610195297_70113200469300'
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:12:59 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (12.1ms)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.2ms)
+
+
+  
+ActionView::Template::Error (undefined method `number' for #<Contact:0x00007f8901cef478>):
+    15:     <% @contacts.each do |contact| %>
+    16:       <tr>
+    17:         <td><%= contact.name %></td>
+    18:         <td><%= contact.number %></td>
+    19:         <td><%= link_to 'Show', contact %></td>
+    20:         <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
+    21:         <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  
+app/views/contacts/index.html.erb:18:in `block in _app_views_contacts_index_html_erb__2237183648610195297_70113230973520'
+app/views/contacts/index.html.erb:15:in `_app_views_contacts_index_html_erb__2237183648610195297_70113230973520'
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:16:35 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 29ms (Views: 26.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts/1/edit" for 127.0.0.1 at 2019-07-31 18:16:46 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 109ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `set_category' for #<ContactsController:0x00007f8901bcbe48>
+Did you mean?  set_contact):
+  
+activesupport (5.2.3) lib/active_support/callbacks.rb:426:in `block in make_lambda'
+activesupport (5.2.3) lib/active_support/callbacks.rb:179:in `block (2 levels) in halting_and_conditional'
+actionpack (5.2.3) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (5.2.3) lib/active_support/callbacks.rb:180:in `block in halting_and_conditional'
+activesupport (5.2.3) lib/active_support/callbacks.rb:513:in `block in invoke_before'
+activesupport (5.2.3) lib/active_support/callbacks.rb:513:in `each'
+activesupport (5.2.3) lib/active_support/callbacks.rb:513:in `invoke_before'
+activesupport (5.2.3) lib/active_support/callbacks.rb:131:in `run_callbacks'
+actionpack (5.2.3) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (5.2.3) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (5.2.3) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (5.2.3) lib/active_support/notifications.rb:168:in `block in instrument'
+activesupport (5.2.3) lib/active_support/notifications/instrumenter.rb:23:in `instrument'
+activesupport (5.2.3) lib/active_support/notifications.rb:168:in `instrument'
+actionpack (5.2.3) lib/action_controller/metal/instrumentation.rb:32:in `process_action'
+actionpack (5.2.3) lib/action_controller/metal/params_wrapper.rb:256:in `process_action'
+activerecord (5.2.3) lib/active_record/railties/controller_runtime.rb:24:in `process_action'
+actionpack (5.2.3) lib/abstract_controller/base.rb:134:in `process'
+actionview (5.2.3) lib/action_view/rendering.rb:32:in `process'
+actionpack (5.2.3) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (5.2.3) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:52:in `dispatch'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:34:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (5.2.3) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:17:05 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 42ms (Views: 39.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts/1/edit" for 127.0.0.1 at 2019-07-31 18:17:43 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 126ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `set_category' for #<ContactsController:0x00007f89049aec98>
+Did you mean?  set_contact):
+  
+activesupport (5.2.3) lib/active_support/callbacks.rb:426:in `block in make_lambda'
+activesupport (5.2.3) lib/active_support/callbacks.rb:179:in `block (2 levels) in halting_and_conditional'
+actionpack (5.2.3) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (5.2.3) lib/active_support/callbacks.rb:180:in `block in halting_and_conditional'
+activesupport (5.2.3) lib/active_support/callbacks.rb:513:in `block in invoke_before'
+activesupport (5.2.3) lib/active_support/callbacks.rb:513:in `each'
+activesupport (5.2.3) lib/active_support/callbacks.rb:513:in `invoke_before'
+activesupport (5.2.3) lib/active_support/callbacks.rb:131:in `run_callbacks'
+actionpack (5.2.3) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (5.2.3) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (5.2.3) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (5.2.3) lib/active_support/notifications.rb:168:in `block in instrument'
+activesupport (5.2.3) lib/active_support/notifications/instrumenter.rb:23:in `instrument'
+activesupport (5.2.3) lib/active_support/notifications.rb:168:in `instrument'
+actionpack (5.2.3) lib/action_controller/metal/instrumentation.rb:32:in `process_action'
+actionpack (5.2.3) lib/action_controller/metal/params_wrapper.rb:256:in `process_action'
+activerecord (5.2.3) lib/active_record/railties/controller_runtime.rb:24:in `process_action'
+actionpack (5.2.3) lib/abstract_controller/base.rb:134:in `process'
+actionview (5.2.3) lib/action_view/rendering.rb:32:in `process'
+actionpack (5.2.3) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (5.2.3) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:52:in `dispatch'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:34:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (5.2.3) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/contacts/1/edit" for 127.0.0.1 at 2019-07-31 18:18:29 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:53
+  Rendering contacts/edit.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (365.8ms)
+  Rendered contacts/edit.html.erb within layouts/application (367.1ms)
+Completed 500 Internal Server Error in 385ms (ActiveRecord: 1.2ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `category' for #<#<Class:0x00007f89014e3018>:0x00007f89014e1560>):
+    1: <%= form_with(model: category, local: true) do |form| %>
+    2:   <% if category.errors.any? %>
+    3:     <div id="error_explanation">
+    4:       <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+  
+app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb___985612493823446322_70113204532720'
+app/views/contacts/edit.html.erb:3:in `_app_views_contacts_edit_html_erb___1851756265684451328_70113204575260'
+Started GET "/contacts/1/edit" for 127.0.0.1 at 2019-07-31 18:19:05 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:53
+  Rendering contacts/edit.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (26.5ms)
+  Rendered contacts/edit.html.erb within layouts/application (28.7ms)
+Completed 200 OK in 49ms (Views: 46.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:19:09 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.5ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 24ms (Views: 22.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/contacts/2" for 127.0.0.1 at 2019-07-31 18:19:12 -0300
+Processing by ContactsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:53
+  Rendering contacts/show.html.erb within layouts/application
+  Rendered contacts/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 30ms (Views: 27.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:19:15 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 28ms (Views: 26.4ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/contacts/1" for 127.0.0.1 at 2019-07-31 18:19:17 -0300
+Processing by ContactsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"zYshr8fnpSJ9nngp7jlmmvVoB5ic9s3UA/jD5/7P3R7kTyL3I95xRhcgALvApd9iKxvGKeTz6yyFbuTduyUrRA==", "id"=>"1"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:53
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:46
+  [1m[36mContact Destroy (1.4ms)[0m  [1m[31mDELETE FROM "contacts" WHERE "contacts"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/contacts_controller.rb:46
+  [1m[35m (7.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:46
+Redirected to 
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 8.8ms)
+
+
+  
+ActionController::ActionControllerError (Cannot redirect to nil!):
+  
+app/controllers/contacts_controller.rb:47:in `destroy'
+Started GET "/contacts/new" for 127.0.0.1 at 2019-07-31 18:19:55 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (2.8ms)
+  Rendered contacts/new.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 30ms (Views: 28.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/contacts" for 127.0.0.1 at 2019-07-31 18:20:01 -0300
+Processing by ContactsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FDO3/JCM8uZg/pLGB5bUOw20fKx5leMosFC0AQTW0h3/a9ibIfzffdo/qwHR/+X7oxIO5vqsiAUpKd07/f1NMA==", "contact"=>{"name"=>"Bruno"}, "commit"=>"Create Contact"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:22
+  [1m[36mContact Create (0.9ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Bruno"], ["created_at", "2019-07-31 21:20:01.167015"], ["updated_at", "2019-07-31 21:20:01.167015"]]
+  ↳ app/controllers/contacts_controller.rb:22
+  [1m[35m (8.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:22
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 17ms (ActiveRecord: 8.9ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:20:01 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 25ms (Views: 22.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-07-31 18:20:04 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (2.3ms)
+  Rendered contacts/new.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 27ms (Views: 25.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/contacts" for 127.0.0.1 at 2019-07-31 18:20:09 -0300
+Processing by ContactsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Dz2XsD5+Q4sbQ5wijJdDZ7fM062Ukm3OCIoVsTyjuOzkZfjXjw5uEKGCpeVa/nKnGWqh5xerBuOR83yLxYgnwQ==", "contact"=>{"name"=>"Ginga"}, "commit"=>"Create Contact"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:22
+  [1m[36mContact Create (0.5ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Ginga"], ["created_at", "2019-07-31 21:20:09.969956"], ["updated_at", "2019-07-31 21:20:09.969956"]]
+  ↳ app/controllers/contacts_controller.rb:22
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:22
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 16ms (ActiveRecord: 7.2ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:20:10 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 33ms (Views: 31.3ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/contacts/2" for 127.0.0.1 at 2019-07-31 18:20:13 -0300
+Processing by ContactsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"WSkpNH0qeVB3wM7rdFrG7h5ig8OdkZQPF1miFvX6RDJw7SpsmROtNB1+tnlaxn8WwBFCcuWUsveRz4UssBCyaA==", "id"=>"2"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:53
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:46
+  [1m[36mContact Destroy (0.4ms)[0m  [1m[31mDELETE FROM "contacts" WHERE "contacts"."id" = ?[0m  [["id", 2]]
+  ↳ app/controllers/contacts_controller.rb:46
+  [1m[35m (5.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:46
+Redirected to 
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 5.7ms)
+
+
+  
+ActionController::ActionControllerError (Cannot redirect to nil!):
+  
+app/controllers/contacts_controller.rb:47:in `destroy'
+Started DELETE "/contacts/4" for 127.0.0.1 at 2019-07-31 18:20:18 -0300
+Processing by ContactsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"WSkpNH0qeVB3wM7rdFrG7h5ig8OdkZQPF1miFvX6RDJw7SpsmROtNB1+tnlaxn8WwBFCcuWUsveRz4UssBCyaA==", "id"=>"4"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:53
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:46
+  [1m[36mContact Destroy (1.1ms)[0m  [1m[31mDELETE FROM "contacts" WHERE "contacts"."id" = ?[0m  [["id", 4]]
+  ↳ app/controllers/contacts_controller.rb:46
+  [1m[35m (7.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:46
+Redirected to 
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 8.7ms)
+
+
+  
+ActionController::ActionControllerError (Cannot redirect to nil!):
+  
+app/controllers/contacts_controller.rb:47:in `destroy'
+Started DELETE "/contacts/4" for 127.0.0.1 at 2019-07-31 18:22:36 -0300
+Processing by ContactsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"WSkpNH0qeVB3wM7rdFrG7h5ig8OdkZQPF1miFvX6RDJw7SpsmROtNB1+tnlaxn8WwBFCcuWUsveRz4UssBCyaA==", "id"=>"4"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:56
+Completed 404 Not Found in 13ms (ActiveRecord: 1.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Contact with 'id'=4):
+  
+app/controllers/contacts_controller.rb:56:in `set_contact'
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:22:44 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (11.1ms)
+Completed 200 OK in 47ms (Views: 44.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-07-31 18:22:46 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (2.5ms)
+  Rendered contacts/new.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 27ms (Views: 26.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/contacts" for 127.0.0.1 at 2019-07-31 18:22:52 -0300
+Processing by ContactsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"31nCZIVl4Mk+9ym6NlofrG7J9ZXmhb1a6k5y1Ksrexc0Aa0DNBXNUoQ2EH3gMy5swG+H32W81ndzNxvuUgDkOg==", "contact"=>{"name"=>"Ginga"}, "commit"=>"Create Contact"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:22
+  [1m[36mContact Create (1.4ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Ginga"], ["created_at", "2019-07-31 21:22:52.264238"], ["updated_at", "2019-07-31 21:22:52.264238"]]
+  ↳ app/controllers/contacts_controller.rb:22
+  [1m[35m (5.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:22
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 16ms (ActiveRecord: 7.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:22:52 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 25ms (Views: 21.9ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/contacts/5" for 127.0.0.1 at 2019-07-31 18:22:56 -0300
+Processing by ContactsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"cxyphcMtObJ2zPYus8EDf2zAcsLD2uqqC1RHZ9ITxFta2KrdJxTt1hxyjrydXbqHsrOzc7vfzFKNwmBdl/kyAQ==", "id"=>"5"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:56
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:46
+  [1m[36mContact Destroy (0.4ms)[0m  [1m[31mDELETE FROM "contacts" WHERE "contacts"."id" = ?[0m  [["id", 5]]
+  ↳ app/controllers/contacts_controller.rb:46
+  [1m[35m (5.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:46
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 11ms (ActiveRecord: 5.6ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:22:56 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 24ms (Views: 22.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts/3" for 127.0.0.1 at 2019-07-31 18:22:59 -0300
+Processing by ContactsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:56
+  Rendering contacts/show.html.erb within layouts/application
+  Rendered contacts/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 28ms (Views: 25.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:23:00 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 29ms (Views: 27.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts/3/edit" for 127.0.0.1 at 2019-07-31 18:23:01 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:56
+  Rendering contacts/edit.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (2.8ms)
+  Rendered contacts/edit.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 31ms (Views: 27.6ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/contacts/3" for 127.0.0.1 at 2019-07-31 18:23:06 -0300
+Processing by ContactsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7VXuz9kqEvvPF2sPY9TtavjXBiW2rGjv83xOn1ysCY7qXt08Br0CNHHiK3YHTApNp8OqLypgJT0T5tR4CKnFpw==", "contact"=>{"name"=>"BrunoF"}, "commit"=>"Update Contact", "id"=>"3"}
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:56
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.3ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 0, expected 1)):
+  
+app/controllers/contacts_controller.rb:36:in `update'
+Started PATCH "/contacts/3" for 127.0.0.1 at 2019-07-31 18:25:33 -0300
+Processing by ContactsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7VXuz9kqEvvPF2sPY9TtavjXBiW2rGjv83xOn1ysCY7qXt08Br0CNHHiK3YHTApNp8OqLypgJT0T5tR4CKnFpw==", "contact"=>{"name"=>"BrunoF"}, "commit"=>"Update Contact", "id"=>"3"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:56
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:36
+  [1m[36mContact Update (0.4ms)[0m  [1m[33mUPDATE "contacts" SET "name" = ?, "updated_at" = ? WHERE "contacts"."id" = ?[0m  [["name", "BrunoF"], ["updated_at", "2019-07-31 21:25:33.590560"], ["id", 3]]
+  ↳ app/controllers/contacts_controller.rb:36
+  [1m[35m (7.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:36
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 33ms (ActiveRecord: 8.9ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:25:33 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 25ms (Views: 22.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts/3/edit" for 127.0.0.1 at 2019-07-31 18:25:36 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:56
+  Rendering contacts/edit.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (3.1ms)
+  Rendered contacts/edit.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 38ms (Views: 35.1ms | ActiveRecord: 0.3ms)
+
+
+Started PATCH "/contacts/3" for 127.0.0.1 at 2019-07-31 18:25:42 -0300
+Processing by ContactsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/99hPL0kYKJYAyFFbqZYhYeR4k73t131Te4JYV6j8HT41FLPYrNwbeb2YTwKPr+i2IVORGt7ECetdJOGCqY8XQ==", "contact"=>{"name"=>"BrunoS"}, "commit"=>"Update Contact", "id"=>"3"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:56
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:36
+  [1m[36mContact Update (0.5ms)[0m  [1m[33mUPDATE "contacts" SET "name" = ?, "updated_at" = ? WHERE "contacts"."id" = ?[0m  [["name", "BrunoS"], ["updated_at", "2019-07-31 21:25:42.312463"], ["id", 3]]
+  ↳ app/controllers/contacts_controller.rb:36
+  [1m[35m (5.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:36
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 14ms (ActiveRecord: 5.8ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:25:42 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 24ms (Views: 22.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts/3/edit" for 127.0.0.1 at 2019-07-31 18:25:49 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:56
+  Rendering contacts/edit.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (2.6ms)
+  Rendered contacts/edit.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 29ms (Views: 26.5ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/contacts/3" for 127.0.0.1 at 2019-07-31 18:25:53 -0300
+Processing by ContactsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QY8QyaAJtRbf8gZjsZ9UMcj8FHoUB6S+rf17z1/tDFVGhCM6f56l2WEHRhrVB7MWl+i4cIjL6WxNZ+EoC+jAfA==", "contact"=>{"name"=>""}, "commit"=>"Update Contact", "id"=>"3"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:56
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:36
+  [1m[36mContact Update (0.5ms)[0m  [1m[33mUPDATE "contacts" SET "name" = ?, "updated_at" = ? WHERE "contacts"."id" = ?[0m  [["name", ""], ["updated_at", "2019-07-31 21:25:53.246297"], ["id", 3]]
+  ↳ app/controllers/contacts_controller.rb:36
+  [1m[35m (7.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:36
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 16ms (ActiveRecord: 7.9ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:25:53 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 25ms (Views: 22.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts/3/edit" for 127.0.0.1 at 2019-07-31 18:25:55 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:56
+  Rendering contacts/edit.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (2.7ms)
+  Rendered contacts/edit.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 28ms (Views: 25.7ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/contacts/3" for 127.0.0.1 at 2019-07-31 18:25:58 -0300
+Processing by ContactsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"IHezAS8Vb6RuBDX0JSgmZrGgK1Z1qZXLrsewsHXdF2UnfIDy8IJ/a9DxdY1BsMFB7rSHXOll2BlOXSpXIdjbTA==", "contact"=>{"name"=>"B"}, "commit"=>"Update Contact", "id"=>"3"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:56
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:36
+  [1m[36mContact Update (0.6ms)[0m  [1m[33mUPDATE "contacts" SET "name" = ?, "updated_at" = ? WHERE "contacts"."id" = ?[0m  [["name", "B"], ["updated_at", "2019-07-31 21:25:58.059258"], ["id", 3]]
+  ↳ app/controllers/contacts_controller.rb:36
+  [1m[35m (7.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:36
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 16ms (ActiveRecord: 8.3ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:25:58 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 26ms (Views: 24.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts/3" for 127.0.0.1 at 2019-07-31 18:26:00 -0300
+Processing by ContactsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:56
+  Rendering contacts/show.html.erb within layouts/application
+  Rendered contacts/show.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 31ms (Views: 27.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:26:02 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 27ms (Views: 23.7ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/contacts/3" for 127.0.0.1 at 2019-07-31 18:26:04 -0300
+Processing by ContactsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"y6+HSUcK64fc/qYSSEw/0OOScOUqSLVtGA0jiO+yCInia4QRozM/47ZA3oBm0IYoPeGxVFJNk5WemwSyqlj+0w==", "id"=>"3"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:56
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:46
+  [1m[36mContact Destroy (0.4ms)[0m  [1m[31mDELETE FROM "contacts" WHERE "contacts"."id" = ?[0m  [["id", 3]]
+  ↳ app/controllers/contacts_controller.rb:46
+  [1m[35m (4.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:46
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 12ms (ActiveRecord: 5.6ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-07-31 18:26:04 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 25ms (Views: 23.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-08-01 20:17:24 -0300
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/brunofesil/.rvm/gems/ruby-2.5.3/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/brunofesil/.rvm/gems/ruby-2.5.3/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/brunofesil/.rvm/gems/ruby-2.5.3/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb (6.1ms)
+Completed 200 OK in 26ms (Views: 14.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-08-01 20:18:30 -0300
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 239ms (Views: 238.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-01 20:18:55 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.7ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 69ms (Views: 51.3ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 20:18:56 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (13.8ms)
+  Rendered contacts/new.html.erb within layouts/application (15.6ms)
+Completed 200 OK in 46ms (Views: 35.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 20:33:57 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (1.4ms)
+  Rendered contacts/new.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 64ms (Views: 47.9ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-08-01 20:34:03 -0300
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 36ms (Views: 33.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-01 20:34:04 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.4ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 43ms (Views: 39.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 20:34:06 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (0.8ms)
+  Rendered contacts/new.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 25ms (Views: 22.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-01 20:34:13 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 30ms (Views: 27.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-01 20:44:53 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 32ms (Views: 23.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 20:44:55 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (302.1ms)
+  Rendered contacts/new.html.erb within layouts/application (304.1ms)
+Completed 500 Internal Server Error in 358ms (ActiveRecord: 1.7ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `f' for #<#<Class:0x00007f5990ed1700>:0x00007f5991aeda98>):
+    16:     <%= form.text_field :name %>
+    17:   </div>
+    18: 
+    19:   <%= f.fields_for :address do |a| %>
+    20:     <div class="field"%>
+    21:       <%= a.label :street %>
+    22:       <%= a.text_field :street %>
+  
+app/views/contacts/_form.html.erb:19:in `block in _app_views_contacts__form_html_erb__2977631691637593455_70011221899360'
+app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb__2977631691637593455_70011221899360'
+app/views/contacts/new.html.erb:3:in `_app_views_contacts_new_html_erb__2280094326421149930_70011336487400'
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 20:45:57 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (338.7ms)
+  Rendered contacts/new.html.erb within layouts/application (341.0ms)
+Completed 500 Internal Server Error in 345ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `form' for #<#<Class:0x00007f5990ed1700>:0x00007f59987ade58>
+Did you mean?  fork):
+    12:   <% end %>
+    13: 
+    14:   <div class="field">
+    15:     <%= form.label :name %>
+    16:     <%= form.text_field :name %>
+    17:   </div>
+    18: 
+  
+app/views/contacts/_form.html.erb:15:in `block in _app_views_contacts__form_html_erb__2977631691637593455_70011355986300'
+app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb__2977631691637593455_70011355986300'
+app/views/contacts/new.html.erb:3:in `_app_views_contacts_new_html_erb__2280094326421149930_70011393504300'
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 20:46:21 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (7.2ms)
+  Rendered contacts/new.html.erb within layouts/application (9.4ms)
+Completed 200 OK in 40ms (Views: 38.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-01 20:46:48 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 23ms (Views: 20.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 20:46:49 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (8.1ms)
+  Rendered contacts/new.html.erb within layouts/application (10.3ms)
+Completed 200 OK in 32ms (Views: 29.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-01 20:46:51 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 25ms (Views: 23.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-01 20:46:52 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 30ms (Views: 28.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 20:46:54 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (4.6ms)
+  Rendered contacts/new.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 26ms (Views: 23.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-01 20:51:24 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 37ms (Views: 27.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-01 21:55:48 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.4ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (4.6ms)
+Completed 500 Internal Server Error in 25ms (ActiveRecord: 0.9ms)
+
+
+  
+ActionView::Template::Error (couldn't find file 'cocoon' with type 'application/javascript'
+Checked in these paths: 
+  /home/brunofesil/RoR/curso_ror_extra/agenda/app/assets/config
+  /home/brunofesil/RoR/curso_ror_extra/agenda/app/assets/images
+  /home/brunofesil/RoR/curso_ror_extra/agenda/app/assets/javascripts
+  /home/brunofesil/RoR/curso_ror_extra/agenda/app/assets/stylesheets
+  /home/brunofesil/.rvm/gems/ruby-2.5.3/gems/coffee-rails-4.2.2/lib/assets/javascripts
+  /home/brunofesil/.rvm/gems/ruby-2.5.3/gems/actioncable-5.2.3/lib/assets/compiled
+  /home/brunofesil/.rvm/gems/ruby-2.5.3/gems/activestorage-5.2.3/app/assets/javascripts
+  /home/brunofesil/.rvm/gems/ruby-2.5.3/gems/actionview-5.2.3/lib/assets/compiled
+  /home/brunofesil/.rvm/gems/ruby-2.5.3/gems/turbolinks-source-5.2.0/lib/assets/javascripts
+  /home/brunofesil/RoR/curso_ror_extra/agenda/node_modules):
+     6:     <%= csp_meta_tag %>
+     7: 
+     8:     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     9:     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    10:   </head>
+    11: 
+    12:   <body>
+  
+app/assets/javascripts/application.js:13
+app/views/layouts/application.html.erb:9:in `_app_views_layouts_application_html_erb___2198065571390390508_47460862133100'
+Started GET "/contacts" for 127.0.0.1 at 2019-08-01 21:56:26 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 29ms (Views: 26.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 21:56:29 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (4.7ms)
+  Rendered contacts/new.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 64ms (Views: 22.8ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 21:56:53 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (5.4ms)
+  Rendered contacts/new.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 28ms (Views: 25.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 21:58:35 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (8.0ms)
+  Rendered contacts/new.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 37ms (Views: 34.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 21:59:39 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (4.8ms)
+  Rendered contacts/new.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 28ms (Views: 26.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 22:04:45 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (1.9ms)
+  Rendered contacts/new.html.erb within layouts/application (4.2ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.0ms)
+
+
+  
+SyntaxError (/home/brunofesil/RoR/curso_ror_extra/agenda/app/views/contacts/_form.html.erb:48: syntax error, unexpected keyword_ensure, expecting end-of-input
+          ensure
+          ^~~~~~):
+  
+app/views/contacts/_form.html.erb:48: syntax error, unexpected keyword_ensure, expecting end-of-input
+app/views/contacts/new.html.erb:3:in `_app_views_contacts_new_html_erb__2280094326421149930_70011306238820'
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 22:05:16 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (166.6ms)
+  Rendered contacts/new.html.erb within layouts/application (168.9ms)
+Completed 500 Internal Server Error in 174ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `simple_fields_for' for #<ActionView::Helpers::FormBuilder:0x00007f5984367cb8>):
+    35: 
+    36:   <h3>Phone</h3>
+    37:   <div id: 'phones'>
+    38:     <%= f.simple_fields_for :phones do |phone| %>
+    39:       <%= render 'phone_fields', :f => phone %>
+    40:     <% end %>
+    41:   </div>
+  
+app/views/contacts/_form.html.erb:38:in `block in _app_views_contacts__form_html_erb__2977631691637593455_70011329817680'
+app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb__2977631691637593455_70011329817680'
+app/views/contacts/new.html.erb:3:in `_app_views_contacts_new_html_erb__2280094326421149930_70011223458340'
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 22:05:49 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (35.4ms)
+  Rendered contacts/new.html.erb within layouts/application (38.1ms)
+Completed 200 OK in 64ms (Views: 60.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 22:12:26 -0300
+Processing by ContactsController#new as HTML
+Completed 500 Internal Server Error in 57ms (ActiveRecord: 2.3ms)
+
+
+  
+NoMethodError (undefined method `build_phones' for #<Contact id: nil, name: nil, created_at: nil, updated_at: nil>
+Did you mean?  build_adress):
+  
+app/controllers/contacts_controller.rb:19:in `new'
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 22:12:49 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (187.0ms)
+  Rendered contacts/new.html.erb within layouts/application (188.7ms)
+Completed 500 Internal Server Error in 221ms (ActiveRecord: 1.9ms)
+
+
+  
+ActionView::Template::Error (undefined method `link_to_add_association' for #<#<Class:0x00007f598cb03208>:0x00007f598cb01890>):
+    39:       <%= render 'phone_fields', :f => phone %>
+    40:     <% end %>
+    41:     <div class='links'>
+    42:       <%= link_to_add_association 'add phone', f, :phones %>
+    43:     </div>
+    44:   </div>
+    45: 
+  
+app/views/contacts/_form.html.erb:42:in `block in _app_views_contacts__form_html_erb__2977631691637593455_70011294570940'
+app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb__2977631691637593455_70011294570940'
+app/views/contacts/new.html.erb:3:in `_app_views_contacts_new_html_erb__2280094326421149930_70011294588160'
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 22:18:46 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (182.4ms)
+  Rendered contacts/new.html.erb within layouts/application (184.5ms)
+Completed 500 Internal Server Error in 190ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `link_to_add_association' for #<#<Class:0x00007f598cb03208>:0x00005654ae38be78>):
+    39:       <%= render 'phone_fields', :f => phone %>
+    40:     <% end %>
+    41:     <div class='links'>
+    42:       <%= link_to_add_association 'add phone', f, :phones %>
+    43:     </div>
+    44:   </div>
+    45: 
+  
+app/views/contacts/_form.html.erb:42:in `block in _app_views_contacts__form_html_erb__2977631691637593455_47460848893340'
+app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb__2977631691637593455_47460848893340'
+app/views/contacts/new.html.erb:3:in `_app_views_contacts_new_html_erb__2280094326421149930_47460850241100'
+Started GET "/" for 127.0.0.1 at 2019-08-01 22:18:52 -0300
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 20ms (Views: 18.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-01 22:18:54 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 26ms (Views: 23.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-01 22:18:55 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (188.4ms)
+  Rendered contacts/new.html.erb within layouts/application (190.4ms)
+Completed 500 Internal Server Error in 195ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `link_to_add_association' for #<#<Class:0x00007f598cb03208>:0x00005654afdc16d0>):
+    39:       <%= render 'phone_fields', :f => phone %>
+    40:     <% end %>
+    41:     <div class='links'>
+    42:       <%= link_to_add_association 'add phone', f, :phones %>
+    43:     </div>
+    44:   </div>
+    45: 
+  
+app/views/contacts/_form.html.erb:42:in `block in _app_views_contacts__form_html_erb__2977631691637593455_47460863493700'
+app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb__2977631691637593455_47460863493700'
+app/views/contacts/new.html.erb:3:in `_app_views_contacts_new_html_erb__2280094326421149930_47460863844920'
+Started GET "/" for 127.0.0.1 at 2019-08-04 12:04:03 -0300
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/brunofesil/.rvm/gems/ruby-2.5.3/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 513ms (Views: 500.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-04 12:04:07 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (6.6ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (12.8ms)
+Completed 200 OK in 74ms (Views: 45.9ms | ActiveRecord: 7.6ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 12:04:09 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (4.5ms)
+  Rendered contacts/_form.html.erb (62.8ms)
+  Rendered contacts/new.html.erb within layouts/application (65.2ms)
+Completed 200 OK in 158ms (Views: 99.6ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 12:04:15 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (2.2ms)
+  Rendered contacts/_form.html.erb (15.6ms)
+  Rendered contacts/new.html.erb within layouts/application (17.5ms)
+Completed 200 OK in 55ms (Views: 52.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 12:04:19 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (2.3ms)
+  Rendered contacts/_form.html.erb (13.8ms)
+  Rendered contacts/new.html.erb within layouts/application (16.4ms)
+Completed 200 OK in 57ms (Views: 53.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 12:04:20 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (4.8ms)
+  Rendered contacts/_form.html.erb (17.5ms)
+  Rendered contacts/new.html.erb within layouts/application (20.7ms)
+Completed 200 OK in 92ms (Views: 88.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 12:06:51 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (2.2ms)
+  Rendered contacts/_form.html.erb (16.8ms)
+  Rendered contacts/new.html.erb within layouts/application (18.5ms)
+Completed 200 OK in 54ms (Views: 51.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 12:06:52 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (2.3ms)
+  Rendered contacts/_form.html.erb (16.8ms)
+  Rendered contacts/new.html.erb within layouts/application (19.0ms)
+Completed 200 OK in 54ms (Views: 50.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 12:06:53 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.8ms)
+  Rendered contacts/_form.html.erb (11.4ms)
+  Rendered contacts/new.html.erb within layouts/application (14.5ms)
+Completed 200 OK in 47ms (Views: 42.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 12:53:54 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.5ms)
+  Rendered contacts/_form.html.erb (9.4ms)
+  Rendered contacts/new.html.erb within layouts/application (11.6ms)
+Completed 200 OK in 35ms (Views: 31.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:02:08 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (30.4ms)
+  Rendered contacts/new.html.erb within layouts/application (32.3ms)
+Completed 500 Internal Server Error in 37ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (Association phone doesn't exist on Contact):
+    39:       <%= render 'phone_fields', :f => phone %>
+    40:     <% end %>
+    41:     <div class='links'>
+    42:       <%= link_to_add_association 'add phone', f, :phone %>
+    43:     </div>
+    44:   </div>
+    45: 
+  
+app/views/contacts/_form.html.erb:42:in `block in _app_views_contacts__form_html_erb___2749885948892427553_70107068827000'
+app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb___2749885948892427553_70107068827000'
+app/views/contacts/new.html.erb:3:in `_app_views_contacts_new_html_erb___4151680173640550554_70107068841280'
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:02:18 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.9ms)
+  Rendered contacts/_form.html.erb (9.8ms)
+  Rendered contacts/new.html.erb within layouts/application (11.7ms)
+Completed 200 OK in 35ms (Views: 32.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:02:21 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.1ms)
+  Rendered contacts/_form.html.erb (7.7ms)
+  Rendered contacts/new.html.erb within layouts/application (9.7ms)
+Completed 200 OK in 33ms (Views: 29.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:07:15 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.5ms)
+  Rendered contacts/_form.html.erb (12.5ms)
+  Rendered contacts/new.html.erb within layouts/application (14.2ms)
+Completed 200 OK in 59ms (Views: 56.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:07:18 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.2ms)
+  Rendered contacts/_form.html.erb (8.4ms)
+  Rendered contacts/new.html.erb within layouts/application (9.9ms)
+Completed 200 OK in 46ms (Views: 30.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:07:19 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.5ms)
+  Rendered contacts/_form.html.erb (12.5ms)
+  Rendered contacts/new.html.erb within layouts/application (14.3ms)
+Completed 200 OK in 41ms (Views: 38.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:11:02 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.4ms)
+  Rendered contacts/_form.html.erb (9.4ms)
+  Rendered contacts/new.html.erb within layouts/application (11.2ms)
+Completed 200 OK in 35ms (Views: 33.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:11:04 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.5ms)
+  Rendered contacts/_form.html.erb (9.4ms)
+  Rendered contacts/new.html.erb within layouts/application (11.4ms)
+Completed 200 OK in 35ms (Views: 32.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:11:05 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.8ms)
+  Rendered contacts/_form.html.erb (10.5ms)
+  Rendered contacts/new.html.erb within layouts/application (12.2ms)
+Completed 200 OK in 37ms (Views: 34.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:11:06 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.3ms)
+  Rendered contacts/_form.html.erb (9.0ms)
+  Rendered contacts/new.html.erb within layouts/application (10.9ms)
+Completed 200 OK in 37ms (Views: 34.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:11:07 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.6ms)
+  Rendered contacts/_form.html.erb (10.1ms)
+  Rendered contacts/new.html.erb within layouts/application (12.9ms)
+Completed 200 OK in 48ms (Views: 44.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:11:55 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (9.2ms)
+  Rendered contacts/new.html.erb within layouts/application (11.1ms)
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (Missing partial contacts/__phone_fields, application/__phone_fields with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/home/brunofesil/RoR/curso_ror_extra/agenda/app/views"
+):
+    39:       <%= render 'phone_fields', :f => phone %>
+    40:     <% end %>
+    41:     <div class='links'>
+    42:       <%= link_to_add_association 'add phone', f, :phones, :partial => '_phone_fields' %>
+    43:     </div>
+    44:   </div>
+    45: 
+  
+app/views/contacts/_form.html.erb:42:in `block in _app_views_contacts__form_html_erb___2749885948892427553_70107019762260'
+app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb___2749885948892427553_70107019762260'
+app/views/contacts/new.html.erb:3:in `_app_views_contacts_new_html_erb___4151680173640550554_70107019792860'
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:14:13 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (8.8ms)
+  Rendered contacts/new.html.erb within layouts/application (10.3ms)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (Missing partial contacts/__phone_fields, application/__phone_fields with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/home/brunofesil/RoR/curso_ror_extra/agenda/app/views"
+):
+    39:       <%= render 'phone_fields', :f => phone %>
+    40:     <% end %>
+    41:     <div class='links'>
+    42:       <%= link_to_add_association 'add phone', f, :phones, :partial => '_phone_fields' %>
+    43:     </div>
+    44:   </div>
+    45: 
+  
+app/views/contacts/_form.html.erb:42:in `block in _app_views_contacts__form_html_erb___2749885948892427553_70106885440780'
+app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb___2749885948892427553_70106885440780'
+app/views/contacts/new.html.erb:3:in `_app_views_contacts_new_html_erb___4151680173640550554_70106885489300'
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:14:21 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.4ms)
+  Rendered contacts/_form.html.erb (9.9ms)
+  Rendered contacts/new.html.erb within layouts/application (11.6ms)
+Completed 200 OK in 35ms (Views: 32.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:14:46 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (6.4ms)
+  Rendered contacts/new.html.erb within layouts/application (8.2ms)
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (Association contacts doesn't exist on Contact):
+    39:       <%= render 'phone_fields', :f => phone %>
+    40:     <% end %>
+    41:     <div class='links'>
+    42:       <%= link_to_add_association 'add phone', f, :contacts, :partial => 'phone_fields' %>
+    43:     </div>
+    44:   </div>
+    45: 
+  
+app/views/contacts/_form.html.erb:42:in `block in _app_views_contacts__form_html_erb___2749885948892427553_70107072387080'
+app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb___2749885948892427553_70107072387080'
+app/views/contacts/new.html.erb:3:in `_app_views_contacts_new_html_erb___4151680173640550554_70107072615360'
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:15:10 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (7.2ms)
+  Rendered contacts/new.html.erb within layouts/application (8.8ms)
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (Association phone doesn't exist on Contact):
+    39:       <%= render 'phone_fields', :f => phone %>
+    40:     <% end %>
+    41:     <div class='links'>
+    42:       <%= link_to_add_association 'add phone', f, :phone, :partial => 'phone_fields' %>
+    43:     </div>
+    44:   </div>
+    45: 
+  
+app/views/contacts/_form.html.erb:42:in `block in _app_views_contacts__form_html_erb___2749885948892427553_70106953547600'
+app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb___2749885948892427553_70106953547600'
+app/views/contacts/new.html.erb:3:in `_app_views_contacts_new_html_erb___4151680173640550554_70106953596620'
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:15:17 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (6.3ms)
+  Rendered contacts/new.html.erb within layouts/application (8.6ms)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (Association phone doesn't exist on Contact):
+    39:       <%= render 'phone_fields', :f => phone %>
+    40:     <% end %>
+    41:     <div class='links'>
+    42:       <%= link_to_add_association 'add phone', f, :phone, :partial => 'phone_fields' %>
+    43:     </div>
+    44:   </div>
+    45: 
+  
+app/views/contacts/_form.html.erb:42:in `block in _app_views_contacts__form_html_erb___2749885948892427553_70106986616300'
+app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb___2749885948892427553_70106986616300'
+app/views/contacts/new.html.erb:3:in `_app_views_contacts_new_html_erb___4151680173640550554_70106986685740'
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:15:32 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.4ms)
+  Rendered contacts/_form.html.erb (9.1ms)
+  Rendered contacts/new.html.erb within layouts/application (19.1ms)
+Completed 200 OK in 43ms (Views: 39.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:15:59 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.2ms)
+  Rendered contacts/_form.html.erb (9.8ms)
+  Rendered contacts/new.html.erb within layouts/application (11.8ms)
+Completed 200 OK in 35ms (Views: 32.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:16:04 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.2ms)
+  Rendered contacts/_form.html.erb (11.1ms)
+  Rendered contacts/new.html.erb within layouts/application (13.3ms)
+Completed 200 OK in 38ms (Views: 34.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:17:53 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.2ms)
+  Rendered contacts/_form.html.erb (8.7ms)
+  Rendered contacts/new.html.erb within layouts/application (10.5ms)
+Completed 200 OK in 33ms (Views: 30.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:18:27 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.3ms)
+  Rendered contacts/_form.html.erb (10.7ms)
+  Rendered contacts/new.html.erb within layouts/application (12.6ms)
+Completed 200 OK in 41ms (Views: 38.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:19:07 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.5ms)
+  Rendered contacts/_form.html.erb (10.4ms)
+  Rendered contacts/new.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 36ms (Views: 32.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:19:10 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (2.0ms)
+  Rendered contacts/_form.html.erb (11.0ms)
+  Rendered contacts/new.html.erb within layouts/application (13.3ms)
+Completed 200 OK in 42ms (Views: 37.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:19:40 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.3ms)
+  Rendered contacts/_form.html.erb (8.1ms)
+  Rendered contacts/new.html.erb within layouts/application (10.3ms)
+Completed 200 OK in 37ms (Views: 33.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:19:44 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.3ms)
+  Rendered contacts/_form.html.erb (8.0ms)
+  Rendered contacts/new.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 34ms (Views: 30.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/contacts" for 127.0.0.1 at 2019-08-04 13:19:45 -0300
+Processing by ContactsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"I+kf0+2iOloNT3wsm4FzJqCianPuW8ClCXTj9PKhkWY0kTdvAQZE0twP32dyvQAF3qxtHF5O513cWUle8bb6lw==", "contact"=>{"name"=>"", "address"=>{"street"=>"", "number"=>"", "neighborhood"=>""}}, "commit"=>"Save"}
+Unpermitted parameter: :address
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:24
+  [1m[36mContact Create (0.9ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", ""], ["created_at", "2019-08-04 16:19:45.922640"], ["updated_at", "2019-08-04 16:19:45.922640"]]
+  ↳ app/controllers/contacts_controller.rb:24
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:24
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 16ms (ActiveRecord: 7.4ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-04 13:19:45 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 30ms (Views: 28.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts/6" for 127.0.0.1 at 2019-08-04 13:19:49 -0300
+Processing by ContactsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/show.html.erb within layouts/application
+  Rendered contacts/show.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 33ms (Views: 24.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts/6/edit" for 127.0.0.1 at 2019-08-04 13:19:51 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/edit.html.erb within layouts/application
+  [1m[36mPhone Load (0.6ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."contact_id" = ?[0m  [["contact_id", 6]]
+  ↳ app/views/contacts/_form.html.erb:38
+  Rendered contacts/_phone_fields.html.erb (1.9ms)
+  Rendered contacts/_form.html.erb (13.4ms)
+  Rendered contacts/edit.html.erb within layouts/application (15.7ms)
+Completed 200 OK in 43ms (Views: 38.4ms | ActiveRecord: 0.9ms)
+
+
+Started PATCH "/contacts/6" for 127.0.0.1 at 2019-08-04 13:19:59 -0300
+Processing by ContactsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"83rE3KvwBBDYZVPniGIjpzXM3RJA+8YE7urQ4ZDnLj43ZIbhvc5yWLNG8B7wj2ynyyl5+vNfssXBgojZbCN6TQ==", "contact"=>{"name"=>"Brunofesil", "address"=>{"street"=>"", "number"=>"", "neighborhood"=>""}}, "commit"=>"Save", "id"=>"6"}
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+Unpermitted parameter: :address
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:38
+  [1m[36mContact Update (0.6ms)[0m  [1m[33mUPDATE "contacts" SET "name" = ?, "updated_at" = ? WHERE "contacts"."id" = ?[0m  [["name", "Brunofesil"], ["updated_at", "2019-08-04 16:19:59.430014"], ["id", 6]]
+  ↳ app/controllers/contacts_controller.rb:38
+  [1m[35m (5.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:38
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 17ms (ActiveRecord: 6.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-04 13:19:59 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (13.4ms)
+Completed 200 OK in 39ms (Views: 36.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts/6" for 127.0.0.1 at 2019-08-04 13:20:05 -0300
+Processing by ContactsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/show.html.erb within layouts/application
+  Rendered contacts/show.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 27ms (Views: 24.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts/6/edit" for 127.0.0.1 at 2019-08-04 13:20:07 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/edit.html.erb within layouts/application
+  [1m[36mPhone Load (0.2ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."contact_id" = ?[0m  [["contact_id", 6]]
+  ↳ app/views/contacts/_form.html.erb:38
+  Rendered contacts/_phone_fields.html.erb (1.3ms)
+  Rendered contacts/_form.html.erb (11.4ms)
+  Rendered contacts/edit.html.erb within layouts/application (13.1ms)
+Completed 200 OK in 37ms (Views: 33.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/contacts/6/edit" for 127.0.0.1 at 2019-08-04 13:20:17 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/edit.html.erb within layouts/application
+  [1m[36mPhone Load (0.2ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."contact_id" = ?[0m  [["contact_id", 6]]
+  ↳ app/views/contacts/_form.html.erb:38
+  Rendered contacts/_phone_fields.html.erb (1.9ms)
+  Rendered contacts/_form.html.erb (11.9ms)
+  Rendered contacts/edit.html.erb within layouts/application (14.2ms)
+Completed 200 OK in 41ms (Views: 37.2ms | ActiveRecord: 0.4ms)
+
+
+Started PATCH "/contacts/6" for 127.0.0.1 at 2019-08-04 13:20:18 -0300
+Processing by ContactsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FvMCJ/gBEI+QAklT3xh0aN1TELhqhkRnwqZBwwHrMpjS7UAa7j9mx/sh6qqn9TtoI7a0UNkiMKbtzhn7/S9m6w==", "contact"=>{"name"=>"Brunofesil", "address"=>{"street"=>"", "number"=>"", "neighborhood"=>""}}, "commit"=>"Save", "id"=>"6"}
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+Unpermitted parameter: :address
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:38
+  [1m[35m (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:38
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 6ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-04 13:20:18 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 28ms (Views: 25.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts/6/edit" for 127.0.0.1 at 2019-08-04 13:20:20 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/edit.html.erb within layouts/application
+  [1m[36mPhone Load (0.2ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."contact_id" = ?[0m  [["contact_id", 6]]
+  ↳ app/views/contacts/_form.html.erb:38
+  Rendered contacts/_phone_fields.html.erb (1.9ms)
+  Rendered contacts/_form.html.erb (11.0ms)
+  Rendered contacts/edit.html.erb within layouts/application (12.7ms)
+Completed 200 OK in 38ms (Views: 34.1ms | ActiveRecord: 0.4ms)
+
+
+Started PATCH "/contacts/6" for 127.0.0.1 at 2019-08-04 13:20:31 -0300
+Processing by ContactsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"IQHHrvSvP0dhP8UxgmLCpx3yK2po0Idnz2oHRKBd5nflH4WT4pFJDwocZsj6j42n4xePgtt086bgAl98XJmyBA==", "contact"=>{"name"=>"Brunofesil", "address"=>{"street"=>"Dr", "number"=>"333", "neighborhood"=>"Oli"}}, "commit"=>"Save", "id"=>"6"}
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+Unpermitted parameter: :address
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:38
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:38
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 7ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-04 13:20:31 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 29ms (Views: 26.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts/6" for 127.0.0.1 at 2019-08-04 13:20:33 -0300
+Processing by ContactsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/show.html.erb within layouts/application
+  Rendered contacts/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 28ms (Views: 25.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts/6/edit" for 127.0.0.1 at 2019-08-04 13:20:36 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/edit.html.erb within layouts/application
+  [1m[36mPhone Load (0.2ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."contact_id" = ?[0m  [["contact_id", 6]]
+  ↳ app/views/contacts/_form.html.erb:38
+  Rendered contacts/_phone_fields.html.erb (1.3ms)
+  Rendered contacts/_form.html.erb (10.4ms)
+  Rendered contacts/edit.html.erb within layouts/application (12.5ms)
+Completed 200 OK in 52ms (Views: 38.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/contacts/6/edit" for 127.0.0.1 at 2019-08-04 13:45:19 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.4ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/edit.html.erb within layouts/application
+  [1m[36mPhone Load (0.3ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."contact_id" = ?[0m  [["contact_id", 6]]
+  ↳ app/views/contacts/_form.html.erb:38
+  Rendered contacts/_phone_fields.html.erb (1.4ms)
+  Rendered contacts/_form.html.erb (10.4ms)
+  Rendered contacts/edit.html.erb within layouts/application (12.2ms)
+Completed 200 OK in 34ms (Views: 31.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-04 13:45:27 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.4ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 29ms (Views: 26.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:45:29 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.2ms)
+  Rendered contacts/_form.html.erb (7.8ms)
+  Rendered contacts/new.html.erb within layouts/application (9.3ms)
+Completed 200 OK in 32ms (Views: 29.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 13:45:31 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.5ms)
+  Rendered contacts/_form.html.erb (8.9ms)
+  Rendered contacts/new.html.erb within layouts/application (10.5ms)
+Completed 200 OK in 37ms (Views: 33.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-08-04 14:30:09 -0300
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/brunofesil/.rvm/gems/ruby-2.5.3/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 323ms (Views: 314.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-04 14:30:12 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.4ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (16.8ms)
+Completed 200 OK in 59ms (Views: 41.2ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/contacts/6/edit" for 127.0.0.1 at 2019-08-04 14:30:14 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.4ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/edit.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (407.5ms)
+  Rendered contacts/edit.html.erb within layouts/application (409.6ms)
+Completed 500 Internal Server Error in 419ms (ActiveRecord: 0.4ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `a' for #<#<Class:0x00007fdb24a3faf0>:0x00007fdb1c02eca8>):
+    20: 
+    21:   <%= f.fields_for :address do |f| %>
+    22:     <div class="field"%>
+    23:       <%= a.label :street %>
+    24:       <%= a.text_field :street %>
+    25:     </div>
+    26:     <div class="field"%>
+  
+app/views/contacts/_form.html.erb:23:in `block (2 levels) in _app_views_contacts__form_html_erb__1744575327787292438_70289522283020'
+app/views/contacts/_form.html.erb:21:in `block in _app_views_contacts__form_html_erb__1744575327787292438_70289522283020'
+app/views/contacts/_form.html.erb:1:in `_app_views_contacts__form_html_erb__1744575327787292438_70289522283020'
+app/views/contacts/edit.html.erb:3:in `_app_views_contacts_edit_html_erb___3528007077997467390_70289522260700'
+Started GET "/contacts/6/edit" for 127.0.0.1 at 2019-08-04 14:31:04 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/edit.html.erb within layouts/application
+  [1m[36mPhone Load (0.2ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."contact_id" = ?[0m  [["contact_id", 6]]
+  ↳ app/views/contacts/_form.html.erb:38
+  Rendered contacts/_phone_fields.html.erb (4.8ms)
+  Rendered contacts/_form.html.erb (86.2ms)
+  Rendered contacts/edit.html.erb within layouts/application (88.4ms)
+Completed 200 OK in 145ms (Views: 139.7ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/contacts/6/edit" for 127.0.0.1 at 2019-08-04 14:31:18 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.5ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/edit.html.erb within layouts/application
+  [1m[36mPhone Load (0.4ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."contact_id" = ?[0m  [["contact_id", 6]]
+  ↳ app/views/contacts/_form.html.erb:38
+  Rendered contacts/_phone_fields.html.erb (1.4ms)
+  Rendered contacts/_form.html.erb (12.4ms)
+  Rendered contacts/edit.html.erb within layouts/application (15.1ms)
+Completed 200 OK in 46ms (Views: 42.4ms | ActiveRecord: 0.8ms)
+
+
+Started PATCH "/contacts/6" for 127.0.0.1 at 2019-08-04 14:31:20 -0300
+Processing by ContactsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ualVkmDqJbQcJ4GmPnZVIsQR+U6w25pdLbZ7heGpda/AzTpiQfYvkpdQ3dnELtE+00IYga0xhntpwHU2mDeX3A==", "contact"=>{"name"=>"Brunofesil", "address"=>{"street"=>"", "number"=>"", "neighborhood"=>""}}, "commit"=>"Save", "id"=>"6"}
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+Unpermitted parameter: :address
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:38
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:38
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 7ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-04 14:31:20 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.4ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 34ms (Views: 32.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/contacts/6" for 127.0.0.1 at 2019-08-04 14:31:22 -0300
+Processing by ContactsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/show.html.erb within layouts/application
+  Rendered contacts/show.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 40ms (Views: 37.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts/6/edit" for 127.0.0.1 at 2019-08-04 14:31:23 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/edit.html.erb within layouts/application
+  [1m[36mPhone Load (0.2ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."contact_id" = ?[0m  [["contact_id", 6]]
+  ↳ app/views/contacts/_form.html.erb:38
+  Rendered contacts/_phone_fields.html.erb (2.3ms)
+  Rendered contacts/_form.html.erb (15.6ms)
+  Rendered contacts/edit.html.erb within layouts/application (17.9ms)
+Completed 200 OK in 50ms (Views: 47.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/contacts/6/edit" for 127.0.0.1 at 2019-08-04 22:41:23 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.5ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/edit.html.erb within layouts/application
+  [1m[36mPhone Load (0.4ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."contact_id" = ?[0m  [["contact_id", 6]]
+  ↳ app/views/contacts/_form.html.erb:38
+  Rendered contacts/_phone_fields.html.erb (2.3ms)
+  Rendered contacts/_form.html.erb (16.3ms)
+  Rendered contacts/edit.html.erb within layouts/application (18.2ms)
+Completed 200 OK in 60ms (Views: 56.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/contacts/6/edit" for 127.0.0.1 at 2019-08-04 22:41:25 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/edit.html.erb within layouts/application
+  [1m[36mPhone Load (0.4ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."contact_id" = ?[0m  [["contact_id", 6]]
+  ↳ app/views/contacts/_form.html.erb:38
+  Rendered contacts/_phone_fields.html.erb (2.1ms)
+  Rendered contacts/_form.html.erb (11.9ms)
+  Rendered contacts/edit.html.erb within layouts/application (13.6ms)
+Completed 200 OK in 46ms (Views: 43.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-04 22:41:31 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.4ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 40ms (Views: 37.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 22:41:33 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.9ms)
+  Rendered contacts/_form.html.erb (11.7ms)
+  Rendered contacts/new.html.erb within layouts/application (13.3ms)
+Completed 200 OK in 88ms (Views: 45.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-04 22:41:36 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (2.0ms)
+  Rendered contacts/_form.html.erb (12.1ms)
+  Rendered contacts/new.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 64ms (Views: 60.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-08-05 22:06:48 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/brunofesil/.rvm/gems/ruby-2.5.3/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 279ms (Views: 269.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-05 22:06:52 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.9ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (16.8ms)
+Completed 200 OK in 59ms (Views: 41.4ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-05 22:06:54 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (2.7ms)
+  Rendered contacts/_form.html.erb (44.1ms)
+  Rendered contacts/new.html.erb within layouts/application (46.2ms)
+Completed 200 OK in 137ms (Views: 100.1ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-05 22:06:56 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (2.3ms)
+  Rendered contacts/_form.html.erb (13.6ms)
+  Rendered contacts/new.html.erb within layouts/application (16.2ms)
+Completed 200 OK in 56ms (Views: 52.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-05 22:08:34 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.3ms)
+  Rendered contacts/_form.html.erb (10.0ms)
+  Rendered contacts/new.html.erb within layouts/application (11.5ms)
+Completed 200 OK in 52ms (Views: 48.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/contacts" for 127.0.0.1 at 2019-08-05 22:08:45 -0300
+Processing by ContactsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"GK70xE4gAMxD1ibwcS/VXFRKYuVZbJYgJof4y6gdbfBLMmd+AC0qCkgUztgaNN3B9GvvZz8W/mveSSDJDAyDUw==", "contact"=>{"name"=>"", "address"=>{"street"=>"", "number"=>"", "neighborhood"=>""}}, "commit"=>"Save"}
+Unpermitted parameter: :address
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:24
+  [1m[36mContact Create (0.9ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", ""], ["created_at", "2019-08-06 01:08:45.513678"], ["updated_at", "2019-08-06 01:08:45.513678"]]
+  ↳ app/controllers/contacts_controller.rb:24
+  [1m[35m (5.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:24
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 16ms (ActiveRecord: 6.6ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-05 22:08:45 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.2ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 63ms (Views: 61.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts/7/edit" for 127.0.0.1 at 2019-08-05 22:08:47 -0300
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+  Rendering contacts/edit.html.erb within layouts/application
+  [1m[36mPhone Load (0.7ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."contact_id" = ?[0m  [["contact_id", 7]]
+  ↳ app/views/contacts/_form.html.erb:38
+  Rendered contacts/_phone_fields.html.erb (2.9ms)
+  Rendered contacts/_form.html.erb (27.9ms)
+  Rendered contacts/edit.html.erb within layouts/application (32.4ms)
+Completed 200 OK in 105ms (Views: 96.5ms | ActiveRecord: 1.0ms)
+
+
+Started PATCH "/contacts/7" for 127.0.0.1 at 2019-08-05 22:09:02 -0300
+Processing by ContactsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Pi7ZdmoRu25O2YH8ma5OST6oUnng7MKfqndg5cB+cL/CdObeON1J9dIzaomCSl9Uujmr74973UE6LaImDvFbxg==", "contact"=>{"name"=>"Eva", "address"=>{"street"=>"Eden", "number"=>"0", "neighborhood"=>"Garden"}}, "commit"=>"Save", "id"=>"7"}
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT  "contacts".* FROM "contacts" WHERE "contacts"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:58
+Unpermitted parameter: :address
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/contacts_controller.rb:38
+  [1m[36mContact Update (0.5ms)[0m  [1m[33mUPDATE "contacts" SET "name" = ?, "updated_at" = ? WHERE "contacts"."id" = ?[0m  [["name", "Eva"], ["updated_at", "2019-08-06 01:09:02.388033"], ["id", 7]]
+  ↳ app/controllers/contacts_controller.rb:38
+  [1m[35m (5.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/contacts_controller.rb:38
+Redirected to http://localhost:3000/contacts
+Completed 302 Found in 17ms (ActiveRecord: 6.5ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-05 22:09:02 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 44ms (Views: 41.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-05 22:17:51 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.5ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 30ms (Views: 28.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-05 22:17:53 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.6ms)
+  Rendered contacts/_form.html.erb (10.4ms)
+  Rendered contacts/new.html.erb within layouts/application (12.3ms)
+Completed 200 OK in 41ms (Views: 38.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-05 22:17:58 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.7ms)
+  Rendered contacts/_form.html.erb (10.9ms)
+  Rendered contacts/new.html.erb within layouts/application (12.8ms)
+Completed 200 OK in 35ms (Views: 32.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-05 22:18:02 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (1.2ms)
+  Rendered contacts/_form.html.erb (9.1ms)
+  Rendered contacts/new.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 36ms (Views: 32.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-05 22:18:06 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 28ms (Views: 26.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-08-06 20:34:38 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/brunofesil/.rvm/gems/ruby-2.5.3/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 299ms (Views: 291.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-06 20:34:42 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (2.6ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (18.7ms)
+Completed 200 OK in 66ms (Views: 46.8ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-06 20:34:44 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (2.7ms)
+  Rendered contacts/_form.html.erb (38.1ms)
+  Rendered contacts/new.html.erb within layouts/application (39.9ms)
+Completed 200 OK in 102ms (Views: 65.9ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-06 20:34:46 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (2.2ms)
+  Rendered contacts/_form.html.erb (13.0ms)
+  Rendered contacts/new.html.erb within layouts/application (15.7ms)
+Completed 200 OK in 56ms (Views: 52.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-06 20:34:58 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (2.2ms)
+  Rendered contacts/_form.html.erb (12.4ms)
+  Rendered contacts/new.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 56ms (Views: 52.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts/new" for 127.0.0.1 at 2019-08-06 20:35:11 -0300
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_phone_fields.html.erb (2.2ms)
+  Rendered contacts/_form.html.erb (9.6ms)
+  Rendered contacts/new.html.erb within layouts/application (11.4ms)
+Completed 200 OK in 45ms (Views: 41.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2019-08-06 20:35:12 -0300
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:15
+  Rendered contacts/index.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 47ms (Views: 44.4ms | ActiveRecord: 0.3ms)
+
+
